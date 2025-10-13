@@ -153,4 +153,4 @@ with gr.Blocks() as demo:
     cam.stream(infer, inputs=cam, outputs=out)
     reset_btn.click(fn=reset_counter, outputs=status)
 
-demo.queue().launch(share=True).
+demo.queue().launch(share=True)
