@@ -41,13 +41,11 @@
 
         <div class="bg-white rounded-xl shadow-xl p-8">
 
-<<<<<<< HEAD
             <div x-show="activeTab === 'home'" x-transition>
                 @include('tabs.home-content')
-=======
+                
             <div x-show="activeTab === 'detection'" x-transition>
                 @include('tabs.detection-input')
->>>>>>> 695c2d0896d99f8c1b4438f314ee4baa5f2a03a3
             </div>
 
         </div>

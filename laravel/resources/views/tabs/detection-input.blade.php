@@ -33,7 +33,15 @@
                                         cursor-pointer">
                     </label>
 
-
+                                    <div x-show="videoFile" class="mb-4 p-3 bg-green-50 border border-green-200 rounded-lg">
+                        <p class="text-green-700 font-medium">
+                            <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7" />
+                            </svg>
+                            File dipilih: <span x-text="videoFile"></span>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
