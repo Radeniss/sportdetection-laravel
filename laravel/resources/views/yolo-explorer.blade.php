@@ -28,14 +28,14 @@
             { name: 'test_upload.mp4', date: '2025-10-08 16:45', status: 'Gagal' }
         ],
         nextSlide() {
-            this.carouselIndex = this.carouselIndex === 1 ? 0 : 1;
+            this.carouselIndex = this.carouselIndex === 1?0:1;
         },
         prevSlide() {
-            this.carouselIndex = this.carouselIndex === 0 ? 1 : 0;
+            this.carouselIndex = this.carouselIndex === 0?1:0;
         },
         resetUpload() {
             this.videoFile = null;
-            this.$refs.fileInput.value = '';
+            this.$refs.fileInput.value ='';
         },
         toggleCamera() {
             this.cameraActive = !this.cameraActive;
