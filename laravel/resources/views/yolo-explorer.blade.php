@@ -50,6 +50,11 @@
         @include('partials.nav-tabs')
 
         <div class="bg-white rounded-xl shadow-xl p-8">
+
+            <div x-show="activeTab === 'home'" x-transition>
+                @include('tabs.home-content')
+            </div>
+
         </div>
 
         <footer class="text-center mt-12 text-slate-600">
