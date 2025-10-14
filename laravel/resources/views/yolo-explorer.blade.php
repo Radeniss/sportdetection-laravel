@@ -22,27 +22,17 @@
         modelVersion: 'YOLOv8s',
         confidence: 0.5,
         outputFormat: 'video',
-        historyData: [],
+        historyData: [
+            { name: 'video_traffic.mp4', date: '2025-10-10 14:30', status: 'Selesai' },
+            { name: 'camera_live_01.mp4', date: '2025-10-09 10:15', status: 'Selesai' },
+            { name: 'test_upload.mp4', date: '2025-10-08 16:45', status: 'Gagal' }
+        ],
         nextSlide() {
             this.carouselIndex = this.carouselIndex === 1 ? 0 : 1;
         },
         prevSlide() {
             this.carouselIndex = this.carouselIndex === 0 ? 1 : 0;
         },
-        resetUpload() {
-            this.videoFile = null;
-            this.$refs.fileInput.value = '';
-        },
-        toggleCamera() {
-            this.cameraActive = !this.cameraActive;
-        },
-        submitVideo() {
-            if (this.videoFile) {
-                alert('Video berhasil dikirim: ' + this.videoFile);
-            } else {
-                alert('Silakan pilih video terlebih dahulu');
-            }
-        }
     }" class="max-w-7xl mx-auto px-4 py-8">
 
         @include('partials.header')
@@ -51,8 +41,13 @@
 
         <div class="bg-white rounded-xl shadow-xl p-8">
 
+<<<<<<< HEAD
             <div x-show="activeTab === 'home'" x-transition>
                 @include('tabs.home-content')
+=======
+            <div x-show="activeTab === 'detection'" x-transition>
+                @include('tabs.detection-input')
+>>>>>>> 695c2d0896d99f8c1b4438f314ee4baa5f2a03a3
             </div>
 
         </div>

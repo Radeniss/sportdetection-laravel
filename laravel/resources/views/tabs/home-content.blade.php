@@ -70,4 +70,34 @@
             </div>
         </div>
     </section>
+
+    <section>
+        <h3 class="text-2xl font-semibold text-slate-800 mb-4">Cara Kerja YOLO: Proses Step-by-Step</h3>
+        <div class="space-y-4">
+            <div class="flex gap-4 items-start bg-slate-50 rounded-lg p-5 hover:bg-slate-100 transition-colors">
+                <div
+                    class="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold flex-shrink-0">
+                    1</div>
+                <div>
+                    <h4 class="text-lg font-bold text-slate-800 mb-1">Input Gambar</h4>
+                    <p class="text-slate-600">
+                        Gambar atau frame video diresize ke dimensi standar (misalnya 640×640 piksel) dan dinormalisasi.
+                        Preprocessing minimal memastikan inference tetap cepat.
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex gap-4 items-start bg-slate-50 rounded-lg p-5 hover:bg-slate-100 transition-colors">
+                <div
+                    class="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold flex-shrink-0">
+                    2</div>
+                <div>
+                    <h4 class="text-lg font-bold text-slate-800 mb-1">Pembagian Grid</h4>
+                    <p class="text-slate-600">
+                        Gambar dibagi menjadi grid S×S (contoh: 13×13, 19×19, atau 40×40 tergantung arsitektur).
+                        Setiap sel grid bertanggung jawab mendeteksi objek yang pusatnya berada di dalam sel tersebut.
+                    </p>
+                </div>
+            </div>
+    </section>
 </div>
