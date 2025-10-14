@@ -14,7 +14,7 @@
                 menggunakan pendekatan proposal region), YOLO memproses seluruh gambar dalam <strong>satu kali forward
                     pass</strong> melalui
                 neural network. Pendekatan ini memungkinkan YOLO untuk mendeteksi ribuan objek dalam gambar secara
-                bersamaan dengan kecepatan
+                bersamaan dengan kecepatan 
                 yang sangat tinggi, menjadikannya ideal untuk aplikasi real-time seperti autonomous driving,
                 surveillance, dan augmented reality.
             </p>
