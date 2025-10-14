@@ -128,20 +128,13 @@ class RepetitionCounter:
             self.jj_state = "closed"
 
 def draw_text(img, text, x, y, scale=0.9, thickness=2):
-    # Outline gelap + tulisan putih agar terbaca jelas
-    cv2.putText(img, text, (x, y), cv2.FONT_HERSHEY_SIMPLEX,
-                scale, (0, 0, 0), thickness + 3, cv2.LINE_AA)
-    cv2.putText(img, text, (x, y), cv2.FONT_HERSHEY_SIMPLEX,
-                scale, (255, 255, 255), thickness, cv2.LINE_AA)
+    cv2.putText(img, text, (x,y), cv2.FONT_HERSHEY_SIMPLEX, scale, (0,0,0), thickness+3, cv2.LINE_AA)
+    cv2.putText(img, text, (x,y), cv2.FONT_HERSHEY_SIMPLEX, scale, (255,255,255), thickness, cv2.LINE_AA)
 
-def process_video(in_path, out_path="output.mp4", img_size=640, conf_thr=0.25):
+def process_video(in_path, out_path="output.mp4", img_size=640):
     cap = cv2.VideoCapture(in_path)
-    assert cap.isOpened(), f"Gagal membuka video: {in_path}"
-
-    # FPS fallback → 25 jika tidak terbaca
-    fps = cap.get(cv2.CAP_PROP_FPS)
-    fps = fps if fps and fps > 1 else 25
-
+    assert cap.isOpened(),
+    fps = cap.get(cv2.CAP_PROP_FPS) or 25
     W = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
     H = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
@@ -152,38 +145,44 @@ def process_video(in_path, out_path="output.mp4", img_size=640, conf_thr=0.25):
 
     while True:
         ok, frame = cap.read()
-        if not ok:
-            break
+        if not ok: break
 
-        res = model.predict(source=frame, imgsz=img_size, conf=conf_thr, verbose=False)[0]
+        # Inference YOLO (opsi: conf=0.25)
+        res = model.predict(source=frame, imgsz=img_size, conf=0.25, verbose=False)[0]
 
         if len(res.keypoints) > 0:
+            # pilih deteksi dengan skor tertinggi
             scores = res.boxes.conf.cpu().numpy() if res.boxes is not None else np.array([1.0]*len(res.keypoints))
             best_i = int(np.argmax(scores))
+            kpts = res.keypoints[best_i].data[0].cpu().numpy().reshape(-1,3)
 
-            kpts = res.keypoints[best_i].data[0].cpu().numpy().reshape(-1, 3)
+            def is_standing(kpts):
+                head_y = get_kpt_xy(kpts, 0)[1]
+                ankle_y = (get_kpt_xy(kpts,15)[1] + get_kpt_xy(kpts,16)[1]) / 2
+                return (ankle_y - head_y) > 0.5 * ankle_y
 
-            # Update penghitung gerakan
-            counter.update_pushup(kpts)
-            counter.update_squat(kpts)
-            counter.update_jj(kpts, frame_w=W)
+            if is_standing(kpts):
+                counter.update_jj(kpts, frame_w=W)
+            else:
+                counter.update_pushup(kpts)
+                counter.update_squat(kpts)
 
-            # Render skeleton ke frame
-            frame = res.plot()
+            # render pose di frame
+            plotted = res.plot()  
+            frame = plotted
 
-        # Overlay teks hasil
+        # overlay teks
         draw_text(frame, f"Push-up: {counter.pushup_cnt}", 20, 40)
         draw_text(frame, f"Squat  : {counter.squat_cnt}", 20, 80)
         draw_text(frame, f"J. Jack: {counter.jj_cnt}",   20, 120)
 
         writer.write(frame)
 
-    cap.release()
-    writer.release()
+    cap.release(); writer.release()
     print("Selesai:", out_path)
     return out_path
 
-out_path = process_video(in_path, out_path="output.mp4", img_size=640, conf_thr=0.25)
+out_path = process_video(in_path, out_path="output.mp4", img_size=640)
 
 from google.colab import files
 files.download('output.mp4')
