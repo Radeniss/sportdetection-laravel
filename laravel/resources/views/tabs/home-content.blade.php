@@ -99,5 +99,48 @@
                     </p>
                 </div>
             </div>
+
+            <div class="flex gap-4 items-start bg-slate-50 rounded-lg p-5 hover:bg-slate-100 transition-colors">
+                <div
+                    class="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold flex-shrink-0">
+                    3</div>
+                <div>
+                    <h4 class="text-lg font-bold text-slate-800 mb-1">Prediksi Bounding Box</h4>
+                    <p class="text-slate-600">
+                        Setiap sel grid memprediksi beberapa bounding box (biasanya 3-9 box dengan anchor boxes
+                        berbeda).
+                        Setiap box memiliki 5 parameter: koordinat pusat (x, y), dimensi (width, height), dan confidence
+                        score.
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex gap-4 items-start bg-slate-50 rounded-lg p-5 hover:bg-slate-100 transition-colors">
+                <div
+                    class="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold flex-shrink-0">
+                    4</div>
+                <div>
+                    <h4 class="text-lg font-bold text-slate-800 mb-1">Klasifikasi Multi-Class</h4>
+                    <p class="text-slate-600">
+                        Secara bersamaan, setiap bounding box juga memprediksi probabilitas untuk setiap kelas objek
+                        (misalnya: mobil, orang, kucing, dll). Menggunakan softmax atau sigmoid untuk multi-label
+                        classification.
+                    </p>
+                </div>
+            </div>
+
+            <div class="flex gap-4 items-start bg-slate-50 rounded-lg p-5 hover:bg-slate-100 transition-colors">
+                <div
+                    class="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold flex-shrink-0">
+                    5</div>
+                <div>
+                    <h4 class="text-lg font-bold text-slate-800 mb-1">Non-Maximum Suppression (NMS)</h4>
+                    <p class="text-slate-600">
+                        Menghilangkan deteksi duplikat dengan memfilter box yang overlap tinggi (IoU threshold biasanya
+                        0.45).
+                        Hanya box dengan confidence tertinggi yang dipertahankan untuk setiap objek.
+                    </p>
+                </div>
+            </div>
     </section>
 </div>
