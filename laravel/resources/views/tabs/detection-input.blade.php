@@ -43,11 +43,39 @@
                         </p>
                     </div>
 
-
+                    <div class="flex gap-3">
+                        <button @click="resetUpload()"
+                            class="flex-1 bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold py-3 px-6 rounded-lg transition-colors">
+                            Hapus
+                        </button>
+                        <button @click="submitVideo()"
+                            class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors shadow-lg">
+                            Kirim
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
 
 
     </div>
+</div>
+
+<div class="flex justify-center items-center gap-6 mt-8">
+    <button @click="prevSlide()"
+        class="bg-slate-700 hover:bg-slate-800 text-white font-semibold py-3 px-8 rounded-lg transition-colors shadow-lg">
+        ← Sebelumnya
+    </button>
+
+    <div class="flex gap-2">
+        <div @click="carouselIndex = 0" :class="carouselIndex === 0 ? 'bg-blue-600 w-8' : 'bg-slate-300 w-3'"
+            class="h-3 rounded-full cursor-pointer transition-all"></div>
+        <div @click="carouselIndex = 1" :class="carouselIndex === 1 ? 'bg-blue-600 w-8' : 'bg-slate-300 w-3'"
+            class="h-3 rounded-full cursor-pointer transition-all"></div>
+    </div>
+
+    <button @click="nextSlide()"
+        class="bg-slate-700 hover:bg-slate-800 text-white font-semibold py-3 px-8 rounded-lg transition-colors shadow-lg">
+        Lanjut →
+    </button>
 </div>
