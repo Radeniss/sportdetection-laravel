@@ -1,3 +1,4 @@
+yolo-explorer.blade.php
 <!DOCTYPE html>
 <html lang="id">
 
@@ -57,9 +58,16 @@
 
             <div x-show="activeTab === 'home'" x-transition>
                 @include('tabs.home-content')
-                
+            </div>
+
             <div x-show="activeTab === 'detection'" x-transition>
                 @include('tabs.detection-input')
+            </div>
+
+
+
+            <div x-show="activeTab === 'history'" x-transition>
+                @include('tabs.history-table')
             </div>
 
         </div>

@@ -142,5 +142,35 @@
                     </p>
                 </div>
             </div>
+
+            <div class="flex gap-4 items-start bg-slate-50 rounded-lg p-5 hover:bg-slate-100 transition-colors">
+                <div
+                    class="bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold flex-shrink-0">
+                    6</div>
+                <div>
+                    <h4 class="text-lg font-bold text-slate-800 mb-1">Output Final</h4>
+                    <p class="text-slate-600">
+                        Menghasilkan daftar objek terdeteksi dengan informasi lengkap: koordinat bounding box, label
+                        kelas,
+                        dan confidence score. Output dapat divisualisasikan atau diekspor sebagai JSON untuk processing
+                        lebih lanjut.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-gradient-to-r from-slate-50 to-slate-100 rounded-lg p-6 border border-slate-200">
+        <h3 class="text-xl font-semibold text-slate-800 mb-3">Versi YOLO Terkini</h3>
+        <p class="text-slate-600 mb-3">
+            Sejak peluncuran pertama pada 2016, YOLO telah berkembang melalui berbagai iterasi:
+        </p>
+        <ul class="list-disc list-inside space-y-2 text-slate-600 ml-4">
+            <li><strong>YOLOv1-v3</strong>: Fondasi awal dengan continuous improvements</li>
+            <li><strong>YOLOv4-v5</strong>: Peningkatan signifikan pada akurasi dan kecepatan</li>
+            <li><strong>YOLOv6-v7</strong>: Optimasi untuk edge devices dan mobile deployment</li>
+            <li><strong>YOLOv8</strong>: State-of-the-art dengan API Python yang user-friendly</li>
+            <li><strong>YOLOv9</strong>: Latest innovation dengan architecture improvements</li>
+        </ul>
     </section>
 </div>
