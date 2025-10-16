@@ -4,6 +4,28 @@
 
 <div class="max-w-3xl mx-auto space-y-8">
     <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
+        <h3 class="text-xl font-semibold text-slate-800 mb-4">Pengaturan Kamera</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <label for="camera-source" class="block text-sm font-medium text-slate-700">Sumber Kamera</label>
+                <select id="camera-source" name="camera-source" x-model="selectedCamera" @change="startCamera()" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                    <template x-for="camera in cameras" :key="camera.deviceId">
+                        <option :value="camera.deviceId" x-text="camera.label"></option>
+                    </template>
+                </select>
+            </div>
+            <div>
+                <label for="fps-slider" class="block text-sm font-medium text-slate-700">FPS: <span x-text="fps"></span></label>
+                <input type="range" id="fps-slider" min="5" max="60" x-model="fps" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer">
+            </div>
+        </div>
+        <div class="mt-4">
+            <label for="backend-api" class="block text-sm font-medium text-slate-700">API Backend</label>
+            <input type="text" name="backend-api" id="backend-api" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" placeholder="http://localhost:5000/detect">
+        </div>
+    </div>
+
+    <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
         <label class="block mb-4">
             <span class="text-lg font-semibold text-slate-800 mb-2 block flex items-center">
                 <svg class="w-6 h-6 mr-2 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">

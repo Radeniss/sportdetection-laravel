@@ -9,14 +9,23 @@
             </svg>
             Beranda
         </button>
-        <button @click="activeTab = 'detection'"
-            :class="activeTab === 'detection' ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'"
+        <button @click="activeTab = 'upload'"
+            :class="activeTab === 'upload' ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'"
+            class="flex-1 min-w-[120px] px-6 py-3 rounded-lg font-semibold transition-all duration-200">
+            <svg class="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+            </svg>
+            Upload Video
+        </button>
+        <button @click="activeTab = 'realtime'"
+            :class="activeTab === 'realtime' ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'"
             class="flex-1 min-w-[120px] px-6 py-3 rounded-lg font-semibold transition-all duration-200">
             <svg class="w-5 h-5 inline-block mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
             </svg>
-            Input Deteksi
+            Deteksi Real-time
         </button>
         <button @click="activeTab = 'settings'"
             :class="activeTab === 'settings' ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'"

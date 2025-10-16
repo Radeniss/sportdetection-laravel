@@ -15,7 +15,7 @@
 
 <body class="bg-gradient-to-br from-slate-50 to-slate-100 min-h-screen">
     <div x-data="{
-        activeTab: 'home',
+        activeTab: localStorage.getItem('activeTab') || 'home',
         carouselIndex: 0,
         videoFile: null,
         cameraActive: false,
@@ -27,6 +27,11 @@
             { name: 'camera_live_01.mp4', date: '2025-10-09 10:15', status: 'Selesai' },
             { name: 'test_upload.mp4', date: '2025-10-08 16:45', status: 'Gagal' }
         ],
+        init() {
+            this.$watch('activeTab', value => {
+                localStorage.setItem('activeTab', value);
+            });
+        },
         nextSlide() {
             this.carouselIndex = this.carouselIndex === 1?0:1;
         },
@@ -47,7 +52,7 @@
                 alert('Silakan pilih video terlebih dahulu');
             }
         }
-    }" class="max-w-7xl mx-auto px-4 py-8">
+    }" x-init="init()" class="max-w-7xl mx-auto px-4 py-8">
 
         @include('partials.header')
 
@@ -59,9 +64,14 @@
                 @include('tabs.home-content')
             </div>
 
-            <div x-show="activeTab === 'detection'" x-transition>
-                @include('tabs.detection-input')
+            <div x-show="activeTab === 'upload'" x-transition>
+                @include('tabs.upload-video')
             </div>
+
+            <div x-show="activeTab === 'realtime'" x-transition>
+                @include('tabs.real-time-detection')
+            </div>
+
             <div x-show="activeTab === 'settings'" x-transition>
                 @include('tabs.settings-content')
             </div>
