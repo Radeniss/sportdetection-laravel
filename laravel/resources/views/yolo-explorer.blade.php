@@ -22,11 +22,6 @@
         modelVersion: 'YOLOv8s',
         confidence: 0.5,
         outputFormat: 'video',
-        historyData: [
-            { name: 'video_traffic.mp4', date: '2025-10-10 14:30', status: 'Selesai' },
-            { name: 'camera_live_01.mp4', date: '2025-10-09 10:15', status: 'Selesai' },
-            { name: 'test_upload.mp4', date: '2025-10-08 16:45', status: 'Gagal' }
-        ],
         init() {
             this.$watch('activeTab', value => {
                 localStorage.setItem('activeTab', value);
