@@ -1,4 +1,4 @@
-<h2 class="text-3xl font-bold text-slate-800 mb-6 border-b-4 border-blue-600 inline-block pb-2">
+<h2 class="dark:text-slate-100 text-3xl font-bold text-slate-800 mb-6 border-b-4 border-blue-600 inline-block pb-2 ">
     Apa itu YOLO?
 </h2>
 
@@ -22,7 +22,7 @@
     </section>
 
     <section>
-        <h3 class="text-2xl font-semibold text-slate-800 mb-4">Manfaat Utama</h3>
+        <h3 class="text-2xl font-semibold text-slate-800 dark:text-slate-100 mb-4">Manfaat Utama</h3>
         <div class="grid md:grid-cols-3 gap-6">
             <div class="bg-green-50 rounded-lg p-6 border-t-4 border-green-500 hover:shadow-lg transition-shadow">
                 <div class="text-green-600 mb-3">
@@ -72,7 +72,7 @@
     </section>
 
     <section>
-        <h3 class="text-2xl font-semibold text-slate-800 mb-4">Cara Kerja YOLO: Proses Step-by-Step</h3>
+        <h3 class="text-2xl font-semibold text-slate-800 dark:text-slate-100 mb-4">Cara Kerja YOLO: Proses Step-by-Step</h3>
         <div class="space-y-4">
             <div class="flex gap-4 items-start bg-slate-50 rounded-lg p-5 hover:bg-slate-100 transition-colors">
                 <div

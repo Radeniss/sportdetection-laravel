@@ -30,6 +30,19 @@
                     Belum punya akun?
                 </a>
             </div>
+            <div class="mt-6 text-center">
+                <a href="{{ route('google.login') }}" 
+                class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center">
+                    <svg class="w-5 h-5 mr-2" viewBox="0 0 533.5 544.3">
+                        <path fill="#4285F4" d="M533.5 278.4c0-17.4-1.6-34.1-4.7-50.2H272v95h147.5c-6.4 34.7-25 64-53.4 83.6v68h86.3c50.6-46.6 80.1-115.4 80.1-196.4z"/>
+                        <path fill="#34A853" d="M272 544.3c72.6 0 133.6-24 178.1-65.5l-86.3-68c-24 16-54.7 25.4-91.8 25.4-70.7 0-130.5-47.7-152-111.4h-89v69.9C75.7 484 167.2 544.3 272 544.3z"/>
+                        <path fill="#FBBC05" d="M120 324.8c-10.4-30.7-10.4-63.9 0-94.6V160.3H31v69.9c-21.5 63.7-21.5 133.8 0 197.5l89-69.9z"/>
+                        <path fill="#EA4335" d="M272 107.8c39.5-.6 77.8 14 106.9 40.5l80-80C418.5 24.8 346.5-0.1 272 0 167.2 0 75.7 60.3 31 160.3l89 69.9c21.4-63.7 81.2-111.4 152-111.4z"/>
+                    </svg>
+                    Login dengan Google
+                </a>
+            </div>
+
         </form>
     </div>
 </body>

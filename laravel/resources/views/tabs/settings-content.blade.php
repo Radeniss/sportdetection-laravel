@@ -1,10 +1,10 @@
-<h2 class="text-3xl font-bold text-slate-800 mb-6 border-b-4 border-blue-600 inline-block pb-2">
+<h2 class="text-3xl font-bold text-slate-800 mb-6 border-b-4 border-blue-600 inline-block pb-2 dark:text-slate-100">
     Pengaturan Model Deteksi
 </h2>
 
 <div class="max-w-3xl mx-auto space-y-8">
     <div class="bg-slate-50 rounded-xl p-6 border border-slate-200">
-        <h3 class="text-xl font-semibold text-slate-800 mb-4">Pengaturan Kamera</h3>
+        <h3 class="text-xl font-semibold text-slate-800 mb-4 ">Pengaturan Kamera</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
                 <label for="camera-source" class="block text-sm font-medium text-slate-700">Sumber Kamera</label>
