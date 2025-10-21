@@ -1,4 +1,4 @@
-<h2 class="text-3xl font-bold text-slate-800 mb-6 border-b-4 border-blue-600 inline-block pb-2">
+<h2 class="text-3xl font-bold text-slate-800 mb-6 border-b-4 border-blue-600 inline-block pb-2 dark:text-slate-100">
     Riwayat Pemrosesan
 </h2>
 
@@ -15,17 +15,17 @@
         <tbody>
             <template x-for="(item, index) in historyData" :key="index">
                 <tr class="border-b border-slate-200 hover:bg-slate-50 transition-colors">
-                    <td class="py-4 px-6">
+                    <td class="py-4 px-6 ">
                         <div class="flex items-center">
                             <svg class="w-6 h-6 text-blue-600 mr-3" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
                             </svg>
-                            <span class="font-medium text-slate-800" x-text="item.name"></span>
+                            <span class="font-medium text-slate-800 dark:text-slate-100" x-text="item.name"></span>
                         </div>
                     </td>
-                    <td class="py-4 px-6 text-slate-600" x-text="item.date"></td>
+                    <td class="py-4 px-6 text-slate-600 dark:text-slate-100" x-text="item.date"></td>
                     <td class="py-4 px-6 text-center">
                         <span x-show="item.status === 'Selesai'"
                             class="inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-green-100 text-green-700">
