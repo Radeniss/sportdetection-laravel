@@ -47,7 +47,7 @@
 <body
   class="bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800 dark:text-slate-100 min-h-screen transition-colors duration-500">
 
-  <!-- ✅ Tombol toggle tema -->
+  <!--  Tombol toggle tema -->
   <div class="flex justify-end p-4">
     <button id="theme-toggle"
       class="p-3 rounded-full bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 dark:hover:bg-slate-600 transition text-xl">
@@ -55,7 +55,7 @@
     </button>
   </div>
 
-  <!-- ✅ Script toggle tema -->
+  <!-- Script toggle tema -->
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       const btn = document.getElementById('theme-toggle');
@@ -67,7 +67,7 @@
     });
   </script>
 
-  <!-- ✅ Konten utama -->
+  <!--  Konten utama -->
   <div x-data="{
         activeTab: localStorage.getItem('activeTab') || 'home',
         carouselIndex: 0,
@@ -97,7 +97,7 @@
     @include('partials.header')
     @include('partials.nav-tabs')
 
-    <!-- ✅ Card utama -->
+    <!--  Card utama -->
     <div class="bg-white dark:bg-slate-800 rounded-xl shadow-xl p-8 transition-colors duration-500">
       <div x-show="activeTab === 'home'" x-transition>
         @include('tabs.home-content')
@@ -120,7 +120,7 @@
       </div>
     </div>
 
-    <!-- ✅ Footer -->
+    <!--  Footer -->
     <footer class="text-center mt-12 text-slate-600 dark:text-slate-400 transition-colors duration-500">
       <p>© 2025 YOLO Explorer | Dibuat dengan Alpine.js & Tailwind CSS</p>
     </footer>

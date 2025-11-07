@@ -11,8 +11,8 @@ Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallba
 
 // ========== HALAMAN UTAMA ==========
 Route::get('/', function () {
-    return view('yolo-explorer'); // halaman utama kamu
-})->middleware('auth'); // hanya bisa diakses jika sudah login
+    return view('yolo-explorer');
+})->middleware('auth');
 
 // ========== LOGIN & REGISTER ==========
 Route::middleware('guest')->group(function () {
@@ -28,6 +28,5 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middl
 
 // ========== OPSIONAL: Redirect jika sudah login ==========
 Route::get('/home', function () {
-    // kalau user buka /home, arahkan ke /
     return redirect('/');
 });
