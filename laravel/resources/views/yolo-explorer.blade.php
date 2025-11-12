@@ -69,33 +69,41 @@
 
   <!--  Konten utama -->
   <div x-data="{
-        activeTab: localStorage.getItem('activeTab') || 'home',
+        activeTab: new URLSearchParams(window.location.search).get('tab') || localStorage.getItem('activeTab') || 'home',
         carouselIndex: 0,
         videoFile: null,
         cameraActive: false,
         modelVersion: 'YOLOv8s',
         confidence: 0.5,
         outputFormat: 'video',
-        historyData: [
-            { name: 'video_traffic.mp4', date: '2025-10-10 14:30', status: 'Selesai' },
-            { name: 'camera_live_01.mp4', date: '2025-10-09 10:15', status: 'Selesai' },
-            { name: 'test_upload.mp4', date: '2025-10-08 16:45', status: 'Gagal' }
-        ],
         init() {
             this.$watch('activeTab', value => localStorage.setItem('activeTab', value));
+            
+            // If session has activeTab, use it and clear it from future reloads
+            @if(session('activeTab'))
+                this.activeTab = '{{ session("activeTab") }}';
+            @endif
         },
         nextSlide() { this.carouselIndex = this.carouselIndex === 1 ? 0 : 1 },
         prevSlide() { this.carouselIndex = this.carouselIndex === 0 ? 1 : 0 },
         resetUpload() { this.videoFile = null; this.$refs.fileInput.value = '' },
         toggleCamera() { this.cameraActive = !this.cameraActive },
-        submitVideo() {
-            if (this.videoFile) alert('Video berhasil dikirim: ' + this.videoFile);
-            else alert('Silakan pilih video terlebih dahulu');
-        }
     }" x-init="init()" class="max-w-7xl mx-auto px-4 py-8">
 
     @include('partials.header')
     @include('partials.nav-tabs')
+
+    {{-- Session Messages --}}
+    @if (session('success'))
+        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+            <span class="block sm:inline">{{ session('success') }}</span>
+        </div>
+    @endif
+    @if (session('error'))
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+            <span class="block sm:inline">{{ session('error') }}</span>
+        </div>
+    @endif
 
     <!--  Card utama -->
     <div class="bg-white dark:bg-slate-800 rounded-xl shadow-xl p-8 transition-colors duration-500">

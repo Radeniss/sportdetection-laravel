@@ -8,7 +8,9 @@ class Video extends Model
 {
     protected $fillable = [
         'filename',
+        'processed_filename',
         'status',
+        'details',
         'user_id',
     ];
 }

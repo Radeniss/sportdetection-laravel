@@ -13,15 +13,24 @@
             @csrf
             <div class="mb-4">
                 <label for="name" class="block text-slate-700 text-sm font-bold mb-2">Name</label>
-                <input type="text" name="name" id="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-slate-700 leading-tight focus:outline-none focus:shadow-outline" required autofocus>
+                                <input type="text" name="name" id="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-slate-700 leading-tight focus:outline-none focus:shadow-outline" required autofocus>
+                @error('name')
+                    <p class="text-red-500 text-xs italic mt-2">{{ $message }}</p>
+                @enderror
             </div>
             <div class="mb-4">
                 <label for="email" class="block text-slate-700 text-sm font-bold mb-2">Email</label>
-                <input type="email" name="email" id="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-slate-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                                <input type="email" name="email" id="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-slate-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                @error('email')
+                    <p class="text-red-500 text-xs italic mt-2">{{ $message }}</p>
+                @enderror
             </div>
             <div class="mb-4">
                 <label for="password" class="block text-slate-700 text-sm font-bold mb-2">Password</label>
-                <input type="password" name="password" id="password" class="shadow appearance-none border rounded w-full py-2 px-3 text-slate-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                                <input type="password" name="password" id="password" class="shadow appearance-none border rounded w-full py-2 px-3 text-slate-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                @error('password')
+                    <p class="text-red-500 text-xs italic mt-2">{{ $message }}</p>
+                @enderror
             </div>
             <div class="mb-6">
                 <label for="password_confirmation" class="block text-slate-700 text-sm font-bold mb-2">Confirm Password</label>
