@@ -14,6 +14,8 @@ Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallba
 Route::middleware('auth')->group(function () {
     Route::get('/', [VideoController::class, 'index'])->name('home');
     Route::post('/upload-video', [VideoController::class, 'upload'])->name('video.upload');
+    Route::delete('/videos/{video}', [VideoController::class, 'destroy'])->name('video.destroy');
+    Route::post('/videos/{video}/cancel', [VideoController::class, 'cancel'])->name('video.cancel');
 });
 
 // ========== LOGIN & REGISTER ==========

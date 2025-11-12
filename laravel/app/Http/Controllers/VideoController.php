@@ -51,7 +51,7 @@ class VideoController extends Controller
         try {
             $flaskResponse = Http::timeout(30) // 30 second timeout
                 ->attach('video', file_get_contents(Storage::path($path)), $filename) // <-- Diperbaiki
-                ->post('http://127.0.0.1:8080/api/process', [
+                ->post(config('services.flask.url') . '/process_video', [
                     'video_id' => $video->id,
                     'webhook_url' => url('/api/videos/webhook'),
                 ]);
@@ -80,7 +80,7 @@ class VideoController extends Controller
         $validated = $request->validate([
             'video_id' => 'required|integer|exists:videos,id',
             'status' => 'required|string',
-            'processed_filename' => 'required|string',
+            'processed_filename' => 'nullable|string',
             'details' => 'nullable|array',
         ]);
 
@@ -91,11 +91,61 @@ class VideoController extends Controller
             return response()->json(['message' => 'Video not found.'], 404);
         }
 
+        // Ignore webhook if the job was already cancelled by the user
+        if ($video->status === 'cancelled') {
+            Log::info('Webhook ignored for cancelled video_id: ' . $validated['video_id']);
+            return response()->json(['message' => 'Webhook ignored for cancelled job.']);
+        }
+
         $video->status = $validated['status'];
         $video->processed_filename = $validated['processed_filename'];
         $video->details = $validated['details'] ?? null;
         $video->save();
 
         return response()->json(['message' => 'Webhook processed successfully.']);
+    }
+
+    /**
+     * Cancel a video processing job.
+     */
+    public function cancel(Video $video)
+    {
+        // Authorize
+        if (Auth::id() !== $video->user_id) {
+            abort(403);
+        }
+
+        if (in_array($video->status, ['pending', 'processing'])) {
+            $video->update(['status' => 'cancelled']);
+            return back()->with('success', 'Proses video telah dibatalkan.')->with('activeTab', 'history');
+        }
+
+        return back()->with('error', 'Video ini tidak dapat dibatalkan.')->with('activeTab', 'history');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Video $video)
+    {
+        // Authorize
+        if (Auth::id() !== $video->user_id) {
+            abort(403);
+        }
+
+        // Delete original file
+        $originalPath = 'public/videos/originals/' . $video->filename;
+        if (Storage::exists($originalPath)) {
+            Storage::delete($originalPath);
+        }
+
+        // Delete processed file (if it exists)
+        // Note: This file is on the Flask server, so we can't delete it directly.
+        // This action will just remove the record from the Laravel DB.
+        // For a full cleanup, an API call to the Flask server would be needed.
+
+        $video->delete();
+
+        return back()->with('success', 'Video telah berhasil dihapus.')->with('activeTab', 'history');
     }
 }

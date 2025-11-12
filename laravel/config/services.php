@@ -41,4 +41,8 @@ return [
         ],
     ],
 
+    'flask' => [
+        'url' => env('FLASK_SERVICE_URL'),
+    ],
+
 ];
