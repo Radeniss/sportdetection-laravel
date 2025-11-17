@@ -49,11 +49,11 @@ class VideoController extends Controller
 
         // 3. Dispatch the video to the Flask service
         try {
-            $flaskResponse = Http::timeout(30) // 30 second timeout
+            $flaskResponse = Http::timeout(120) // 120 second timeout
                 ->attach('video', file_get_contents(Storage::path($path)), $filename) // <-- Diperbaiki
                 ->post(config('services.flask.url') . '/process_video', [
                     'video_id' => $video->id,
-                    'webhook_url' => url('/api/videos/webhook'),
+                    'webhook_url' => 'http://127.0.0.1:8000/api/videos/webhook',
                 ]);
 
             // 4. Handle the response from Flask
@@ -77,19 +77,24 @@ class VideoController extends Controller
      */
     public function handleWebhook(Request $request)
     {
+        Log::info('--- Webhook Received ---');
+        Log::info('Webhook Data: ', $request->all());
+
         $validated = $request->validate([
             'video_id' => 'required|integer|exists:videos,id',
             'status' => 'required|string',
             'processed_filename' => 'nullable|string',
             'details' => 'nullable|array',
         ]);
+        Log::info('Validation successful for video_id: ' . $validated['video_id']);
 
         $video = Video::find($validated['video_id']);
 
         if (!$video) {
-            Log::error('Webhook received for non-existent video_id: ' . $validated['video_id']);
+            Log::error('Webhook failed: Video not found with id: ' . $validated['video_id']);
             return response()->json(['message' => 'Video not found.'], 404);
         }
+        Log::info('Video found. Current status: ' . $video->status);
 
         // Ignore webhook if the job was already cancelled by the user
         if ($video->status === 'cancelled') {
@@ -97,11 +102,21 @@ class VideoController extends Controller
             return response()->json(['message' => 'Webhook ignored for cancelled job.']);
         }
 
+        Log::info('Updating video attributes...');
         $video->status = $validated['status'];
         $video->processed_filename = $validated['processed_filename'];
         $video->details = $validated['details'] ?? null;
-        $video->save();
+        
+        try {
+            $video->save();
+            Log::info('SUCCESS: Video record saved to database!');
+        } catch (\Exception $e) {
+            Log::error('DATABASE ERROR: Failed to save video record. Error: ' . $e->getMessage());
+            // Still return a 200 OK so Celery doesn't retry, but log the critical error.
+            return response()->json(['message' => 'Database save failed.'], 500);
+        }
 
+        Log::info('--- Webhook Processed Successfully ---');
         return response()->json(['message' => 'Webhook processed successfully.']);
     }
 
